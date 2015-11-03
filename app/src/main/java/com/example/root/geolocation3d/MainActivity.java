@@ -23,8 +23,6 @@ import android.location.GpsStatus;
 //import android.content.Context;
 import java.util.Iterator;
 
-//import com.example.root.geolocation3d.GpsData;
-
 public class MainActivity extends ActionBarActivity {
     TextView mTextView;
     TextView mTextView2;
