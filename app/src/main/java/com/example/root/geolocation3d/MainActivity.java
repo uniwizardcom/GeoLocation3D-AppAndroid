@@ -3,11 +3,8 @@ package com.example.root.geolocation3d;
 import android.graphics.Color;
 import android.location.GpsSatellite;
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationProvider;
-import android.os.Handler;
-import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,7 +17,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.GpsStatus;
-//import android.content.Context;
+
 import java.util.Iterator;
 
 public class MainActivity extends ActionBarActivity {
@@ -56,19 +53,10 @@ public class MainActivity extends ActionBarActivity {
         mTextView.setText("Info about system:");
         mTextView5.setText("Waiting for satelites ...");
 
-
-
-        //MainGps mainGps = new MainGps(this.getBaseContext());
-
-        // Acquire a reference to the system Location Manager
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        //SensorManagerForAltitude sensorManagerForAltitude = new SensorManagerForAltitude();
 
-        // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                // Called when a new location is found by the network location provider.
-
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
 
@@ -81,25 +69,6 @@ public class MainActivity extends ActionBarActivity {
                 double altitude = location.getAltitude();
                 info = String.format("Altitude: %f", altitude);
                 mTextView4.setText(info);
-
-                /*int satListCount = 0;
-                gpsStatus = locationManager.getGpsStatus(gpsStatus);
-                for(GpsSatellite satellite : gpsStatus.getSatellites()) {
-                    String infoSat = (satListCount++) + ": " + satellite.getPrn() + "," + satellite.usedInFix() + "," + satellite.getSnr() + "," + satellite.getAzimuth() + "," + satellite.getElevation();
-
-                    TableRow row= new TableRow(tthis);
-                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                    row.setLayoutParams(lp);
-
-                    TextView tv = new TextView(tthis);
-                    tv.setText(infoSat);
-                    row.addView(tv);
-
-                    mTableLayout.addView(row,0);
-                }
-                int satCountExtras = location.getExtras().getInt("satellites");
-                info = String.format("Satelites: %d/%d = %d", satListCount, satCountExtras, gpsStatus.getTimeToFirstFix());
-                mTextView5.setText(info);*/
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -211,7 +180,6 @@ public class MainActivity extends ActionBarActivity {
             }
         };
 
-        // Register the listener with the Location Manager to receive location updates
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         //locationManager.addNmeaListener(nmeaListener);
         locationManager.addGpsStatusListener(gpsStatusListener);
@@ -219,20 +187,15 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if(id == R.id.action_settings) {
             return true;
         }
 
