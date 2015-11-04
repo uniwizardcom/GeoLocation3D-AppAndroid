@@ -26,7 +26,6 @@ public class MainActivity extends ActionBarActivity {
     TextView mTextView3;
     TextView mTextView4;
     TextView mTextView5;
-    TextView mTextView6;
     TableLayout mTableLayout;
     LocationManager locationManager;
     GpsStatus gpsStatus = null;
@@ -37,9 +36,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         tthis = this;
 
         mTextView = (TextView) findViewById(R.id.textView);
@@ -47,10 +43,9 @@ public class MainActivity extends ActionBarActivity {
         mTextView3 = (TextView) findViewById(R.id.textView3);
         mTextView4 = (TextView) findViewById(R.id.textView4);
         mTextView5 = (TextView) findViewById(R.id.textView5);
-        mTextView6 = (TextView) findViewById(R.id.textView6);
         mTableLayout = (TableLayout) findViewById(R.id.tableLayout);
 
-        mTextView.setText("Info about system:");
+        mTextView.setText("Waiting for data: ...");
         mTextView5.setText("Waiting for satelites ...");
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -69,6 +64,11 @@ public class MainActivity extends ActionBarActivity {
                 double altitude = location.getAltitude();
                 info = String.format("Altitude: %f", altitude);
                 mTextView4.setText(info);
+
+                boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                //boolean networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                info = String.format("Info about system: %s is %s", LocationManager.GPS_PROVIDER, gpsEnabled?"enadbled":"disabled");
+                mTextView.setText(info);
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -113,12 +113,12 @@ public class MainActivity extends ActionBarActivity {
                         int satListCount = 0;
 
                         mTableLayout.removeAllViews();
-                        mTableLayout.setBackgroundColor(Color.BLACK);
+                        //mTableLayout.setBackgroundColor(Color.BLACK);
 
                         TableRow row = new TableRow(tthis);
                         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
                         row.setLayoutParams(lp);
-                        row.setBackgroundColor(Color.WHITE);
+                        //row.setBackgroundColor(Color.WHITE);
 
                         TextView text1 = new TextView(tthis);
                         TextView text2 = new TextView(tthis);
@@ -147,7 +147,7 @@ public class MainActivity extends ActionBarActivity {
                             row = new TableRow(tthis);
                             lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
                             row.setLayoutParams(lp);
-                            row.setBackgroundColor(Color.WHITE);
+                            //row.setBackgroundColor(Color.WHITE);
 
                             text1 = new TextView(tthis);
                             text2 = new TextView(tthis);
