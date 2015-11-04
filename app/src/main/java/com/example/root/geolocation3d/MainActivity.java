@@ -1,6 +1,8 @@
 package com.example.root.geolocation3d;
 
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.GradientDrawable;
 import android.location.GpsSatellite;
 import android.content.Context;
 import android.location.Location;
@@ -127,12 +129,12 @@ public class MainActivity extends ActionBarActivity {
                         TextView text5 = new TextView(tthis);
                         TextView text6 = new TextView(tthis);
 
-                        text1.setText("id");
-                        text2.setText("Prn");
-                        text3.setText("InFix");
-                        text4.setText("Snr");
-                        text5.setText("Azi");
-                        text6.setText("Ele");
+                        text1.setText("Index");
+                        text2.setText("Pseudo-random\nNumber");
+                        text3.setText("Calculating the most\nrecent GPS fix");
+                        text4.setText("Signal to\nnoise ratio");
+                        text5.setText("Azimuth");
+                        text6.setText("Elevation");
 
                         row.addView(text1);
                         row.addView(text2);
@@ -141,6 +143,23 @@ public class MainActivity extends ActionBarActivity {
                         row.addView(text5);
                         row.addView(text6);
                         mTableLayout.addView(row, satListCount);
+
+                        GradientDrawable gd = new GradientDrawable();
+                        //gd.setColor(0xFF00FF00);
+                        gd.setCornerRadius(5);
+                        gd.setStroke(1, 0xFF000000);
+
+                        text1.setBackground(gd);
+                        text2.setBackground(gd);
+                        text3.setBackground(gd);
+                        text4.setBackground(gd);
+                        text5.setBackground(gd);
+                        text6.setBackground(gd);
+
+                        gd = new GradientDrawable();
+                        gd.setColor(0xFF00FF00);
+                        gd.setCornerRadius(5);
+                        gd.setStroke(1, 0xFF000000);
 
                         for(GpsSatellite satellite : gpsStatus.getSatellites()) {
                             satListCount++;
@@ -156,12 +175,19 @@ public class MainActivity extends ActionBarActivity {
                             text5 = new TextView(tthis);
                             text6 = new TextView(tthis);
 
+                            text1.setBackground(gd);
+                            text2.setBackground(gd);
+                            text3.setBackground(gd);
+                            text4.setBackground(gd);
+                            text5.setBackground(gd);
+                            text6.setBackground(gd);
+
                             text1.setText( String.format("%d", satListCount) );
                             text2.setText( String.format("%d", satellite.getPrn()) );
                             text3.setText( satellite.usedInFix() ? "true" : "false" );
                             text4.setText( String.format("%.2f", satellite.getSnr()) );
-                            text5.setText( String.format("%.2f", satellite.getAzimuth()) );
-                            text6.setText( String.format("%.2f", satellite.getElevation()) );
+                            text5.setText( String.format("%.2f", satellite.getAzimuth()));
+                            text6.setText(String.format("%.2f", satellite.getElevation()) );
 
                             row.addView(text1);
                             row.addView(text2);

@@ -68,8 +68,7 @@
             android:id="@+id/tableLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/textView5"
-            android:showDividers="middle|beginning|end"></TableLayout>
+            android:layout_below="@+id/textView5"></TableLayout>
     </ScrollView>
 
 </RelativeLayout>
